@@ -1,0 +1,46 @@
+{
+    "name": "christian.soronellas/blog-cqrs-es",
+    "require": {
+        "ext-mongo": "*",
+        "buttercup/protects": "dev-master",
+        "rhumsaa/uuid": "~2.7",
+        "moontoast/math": "*",
+        "mathiasverraes/classfunctions": "1.*",
+        "silex/silex": "~1.2",
+        "silex/web-profiler": "~1.0",
+        "symfony/browser-kit": "~2.4",
+        "symfony/class-loader": "~2.4",
+        "symfony/config": "~2.4",
+        "symfony/console": "~2.4",
+        "symfony/form": "~2.4",
+        "symfony/css-selector": "~2.4",
+        "symfony/debug": "~2.4",
+        "symfony/finder": "~2.4",
+        "symfony/monolog-bridge": "~2.4",
+        "symfony/process": "~2.4",
+        "symfony/security": "~2.4",
+        "symfony/translation": "~2.4",
+        "symfony/twig-bridge": "~2.4",
+        "symfony/validator": "~2.4",
+        "symfony/serializer": "~2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.1",
+        "mockery/mockery": "0.9.0"
+    },
+    "authors": [
+        {
+            "name": "Christian Soronellas",
+            "email": "christian.soronellas@atrapalo.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": {
+            "": ["src/"]
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
