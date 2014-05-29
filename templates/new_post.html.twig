@@ -1,0 +1,7 @@
+{% extends 'layout.html.twig' %}
+
+{% block title 'Create a new blog post' %}
+
+{% block content %}
+{{ form(form, {'action': path('create_post'), 'method': 'POST'}) }}
+{% endblock %}

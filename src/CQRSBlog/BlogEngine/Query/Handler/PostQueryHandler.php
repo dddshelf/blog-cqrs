@@ -21,7 +21,7 @@ final class PostQueryHandler
 
     public function handle(PostQuery $aPostQuery)
     {
-        $aPostId = PostId::fromString($aPostQuery->id);
+        $aPostId = PostId::fromString($aPostQuery->getId());
         $data = $this->postRepository->get($aPostId);
 
         $aPost = new Post();

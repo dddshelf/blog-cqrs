@@ -1,0 +1,16 @@
+CQRSBlog\BlogEngine\DomainModel\PostWasCreated:
+    exclusion_policy: ALL
+
+    properties:
+        postId:
+            type: CQRSBlog\BlogEngine\DomainModel\PostId
+            serialized_name: post_id
+
+        title:
+            type: string
+
+        content:
+            type: string
+
+        state:
+            type: integer

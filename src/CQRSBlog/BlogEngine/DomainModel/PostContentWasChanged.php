@@ -5,23 +5,27 @@ namespace CQRSBlog\BlogEngine\DomainModel;
 use Buttercup\Protects\DomainEvent;
 use Buttercup\Protects\IdentifiesAggregate;
 
-final class PostWasCreated implements DomainEvent
+final class PostContentWasChanged implements DomainEvent
 {
+    /**
+     * @var PostId
+     */
     private $postId;
-    private $title;
-    private $content;
-    private $state;
 
-    public function __construct($aggregateId, $title, $content, $state)
+    /**
+     * @var string
+     */
+    private $content;
+
+    public function __construct(PostId $postId, $content)
     {
-        $this->postId = $aggregateId;
-        $this->title = $title;
         $this->content = $content;
-        $this->state = $state;
+        $this->postId = $postId;
     }
 
     /**
      * The Aggregate this event belongs to.
+     *
      * @return IdentifiesAggregate
      */
     public function getAggregateId()
@@ -35,21 +39,5 @@ final class PostWasCreated implements DomainEvent
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @return int
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 }

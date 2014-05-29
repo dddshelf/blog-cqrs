@@ -86,6 +86,33 @@ final class Post implements RecordsEvents, IsEventSourced
         return $aNewPost;
     }
 
+    public function publish()
+    {
+        $this->state = static::STATE_PUBLISHED;
+
+        $this->recordThat(
+            new PostWasPublished($this->postId)
+        );
+    }
+
+    public function changeTitle($aNewTitle)
+    {
+        $this->title = $aNewTitle;
+
+        $this->recordThat(
+            new PostTitleWasChanged($this->postId, $aNewTitle)
+        );
+    }
+
+    public function changeContent($aNewContent)
+    {
+        $this->content = $aNewContent;
+
+        $this->recordThat(
+            new PostContentWasChanged($this->postId, $aNewContent)
+        );
+    }
+
     private function recordThat(DomainEvent $aDomainEvent)
     {
         $this->recordedEvents[] = $aDomainEvent;
@@ -119,4 +146,16 @@ final class Post implements RecordsEvents, IsEventSourced
         $this->title = $event->getTitle();
         $this->content = $event->getContent();
     }
+
+    private function applyPostWasPublished(PostWasPublished $event)
+    {
+        $this->state = static::STATE_PUBLISHED;
+    }
+
+    private function applyPostTitleWasChanged(PostTitleWasChanged $event)
+    {
+        $this->title = $event->getTitle();
+    }
+
+
 }
