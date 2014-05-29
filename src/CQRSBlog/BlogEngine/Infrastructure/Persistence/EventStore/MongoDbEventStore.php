@@ -6,7 +6,7 @@ use Buttercup\Protects\AggregateHistory;
 use Buttercup\Protects\DomainEvent;
 use Buttercup\Protects\DomainEvents;
 use Buttercup\Protects\IdentifiesAggregate;
-use CQRSBlog\BlogEngine\Infrastructure\Projection\MongoDb\PostsProjection;
+use CQRSBlog\BlogEngine\Infrastructure\Projection\MongoDb\PostProjection;
 use MongoCollection;
 use MongoDate;
 use Symfony\Component\Serializer\Serializer;
@@ -23,16 +23,10 @@ final class MongoDbEventStore implements EventStore
      */
     private $serializer;
 
-    /**
-     * @var PostsProjection
-     */
-    private $postsProjection;
-
-    public function __construct($aCollection, $aSerializer, $aPostsProjection)
+    public function __construct($aCollection, $aSerializer)
     {
         $this->eventsCollection = $aCollection;
         $this->serializer       = $aSerializer;
-        $this->postsProjection  = $aPostsProjection;
     }
 
     /**
@@ -49,8 +43,6 @@ final class MongoDbEventStore implements EventStore
                 'created_at'    => new MongoDate()
             ]);
         }
-
-        $this->postsProjection->project($events);
     }
 
     /**

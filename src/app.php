@@ -6,6 +6,8 @@ use CQRSBlog\BlogEngine\Command\Handler\PublishPostHandler;
 use CQRSBlog\BlogEngine\Command\Handler\UpdatePostHandler;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\MongoDbEventStore;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\PostRepository;
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\MongoDb\PostViewRepository;
+use CQRSBlog\BlogEngine\Infrastructure\Projection\MongoDb\PostProjection;
 use CQRSBlog\BlogEngine\Infrastructure\Serialization\SymfonySerializer\Normalizer\PostIdNormalizer;
 use CQRSBlog\BlogEngine\Query\Handler\PostQueryHandler;
 use CQRSBlog\BlogEngine\Query\QueryBus;
@@ -45,7 +47,7 @@ $app['mongodb'] = $app->share(function($app) {
 });
 
 $app['mongodb.posts_projection'] = $app->share(function($app) {
-    return new \CQRSBlog\BlogEngine\Infrastructure\Projection\MongoDb\PostsProjection(
+    return new PostProjection(
         $app['mongodb']->blog_cqrs->posts
     );
 });
@@ -53,19 +55,16 @@ $app['mongodb.posts_projection'] = $app->share(function($app) {
 $app['event_store'] = $app->share(function($app) {
     return new MongoDbEventStore(
         $app['mongodb']->blog_cqrs->events,
-        $app['serializer'],
-        $app['mongodb.posts_projection']
+        $app['serializer']
     );
 });
 
 $app['event_store.post_repository'] = $app->share(function($app) {
-    return new PostRepository($app['event_store']);
+    return new PostRepository($app['event_store'], $app['mongodb.posts_projection']);
 });
 
-$app['mongodb.post_repository'] = $app->share(function($app) {
-    return new \CQRSBlog\BlogEngine\Infrastructure\Persistence\MongoDb\PostRepository(
-        $app['mongodb']->blog_cqrs->posts
-    );
+$app['mongodb.post_view_repository'] = $app->share(function($app) {
+    return new PostViewRepository($app['mongodb']->blog_cqrs->posts);
 });
 
 $app['command_bus'] = $app->share(function($app) {
@@ -78,7 +77,7 @@ $app['command_bus'] = $app->share(function($app) {
 
 $app['query_bus'] = $app->share(function($app) {
     $commandBus = new QueryBus();
-    $commandBus->register(new PostQueryHandler($app['mongodb.post_repository']));
+    $commandBus->register(new PostQueryHandler($app['mongodb.post_view_repository']));
     return $commandBus;
 });
 

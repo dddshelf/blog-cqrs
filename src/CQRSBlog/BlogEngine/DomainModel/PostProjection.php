@@ -7,7 +7,7 @@ use CQRSBlog\BlogEngine\DomainModel\PostTitleWasChanged;
 use CQRSBlog\BlogEngine\DomainModel\PostWasCreated;
 use CQRSBlog\BlogEngine\DomainModel\PostWasPublished;
 
-interface PostsProjection extends Projection
+interface PostProjection extends Projection
 {
     /**
      * Projects a posts creation event

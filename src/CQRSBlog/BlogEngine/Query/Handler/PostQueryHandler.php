@@ -2,32 +2,23 @@
 
 namespace CQRSBlog\BlogEngine\Query\Handler;
 
-use CQRSBlog\BlogEngine\DomainModel\PostId;
-use CQRSBlog\BlogEngine\DomainModel\PostRepository;
-use CQRSBlog\BlogEngine\Query\Post;
+use CQRSBlog\BlogEngine\DomainModel\PostViewRepository;
 use CQRSBlog\BlogEngine\Query\PostQuery;
 
 final class PostQueryHandler
 {
     /**
-     * @var PostRepository
+     * @var PostViewRepository
      */
-    private $postRepository;
+    private $postViewRepository;
 
-    public function __construct($postRepository)
+    public function __construct($postViewRepository)
     {
-        $this->postRepository = $postRepository;
+        $this->postViewRepository = $postViewRepository;
     }
 
     public function handle(PostQuery $aPostQuery)
     {
-        $aPostId = PostId::fromString($aPostQuery->getId());
-        $data = $this->postRepository->get($aPostId);
-
-        $aPost = new Post();
-        $aPost->title = $data['title'];
-        $aPost->content = $data['content'];
-
-        return $aPost;
+        return $this->postViewRepository->find($aPostQuery->getId());
     }
 }

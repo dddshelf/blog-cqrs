@@ -7,6 +7,7 @@ use Buttercup\Protects\IsEventSourced;
 use Buttercup\Protects\RecordsEvents;
 use CQRSBlog\BlogEngine\DomainModel\Post;
 use CQRSBlog\BlogEngine\DomainModel\PostRepository as BasePostRepository;
+use CQRSBlog\BlogEngine\Query\PostProjection;
 
 final class PostRepository implements BasePostRepository
 {
@@ -15,9 +16,15 @@ final class PostRepository implements BasePostRepository
      */
     private $eventStore;
 
-    public function __construct($eventStore)
+    /**
+     * @var PostProjection
+     */
+    private $postProjection;
+
+    public function __construct($eventStore, $postProjection)
     {
         $this->eventStore = $eventStore;
+        $this->postProjection = $postProjection;
     }
 
     /**
@@ -37,7 +44,9 @@ final class PostRepository implements BasePostRepository
      */
     public function add(RecordsEvents $aggregate)
     {
-        $this->eventStore->commit($aggregate->getRecordedEvents());
+        $events = $aggregate->getRecordedEvents();
+        $this->eventStore->commit($events);
+        $this->postProjection->project($events);
 
         $aggregate->clearRecordedEvents();
     }

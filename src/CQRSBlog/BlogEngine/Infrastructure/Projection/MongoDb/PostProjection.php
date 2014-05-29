@@ -8,10 +8,10 @@ use CQRSBlog\BlogEngine\DomainModel\PostTitleWasChanged;
 use CQRSBlog\BlogEngine\DomainModel\PostWasCreated;
 use CQRSBlog\BlogEngine\DomainModel\PostWasPublished;
 use CQRSBlog\BlogEngine\Infrastructure\Projection\BaseProjection;
-use CQRSBlog\BlogEngine\Query\PostsProjection as BasePostsProjection;
+use CQRSBlog\BlogEngine\Query\PostProjection as BasePostProjection;
 use MongoCollection;
 
-final class PostsProjection extends BaseProjection implements BasePostsProjection
+final class PostProjection extends BaseProjection implements BasePostProjection
 {
     /**
      * @var MongoCollection
