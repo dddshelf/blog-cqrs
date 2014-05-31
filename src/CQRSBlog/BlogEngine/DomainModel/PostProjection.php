@@ -1,11 +1,6 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Query;
-
-use CQRSBlog\BlogEngine\DomainModel\PostContentWasChanged;
-use CQRSBlog\BlogEngine\DomainModel\PostTitleWasChanged;
-use CQRSBlog\BlogEngine\DomainModel\PostWasCreated;
-use CQRSBlog\BlogEngine\DomainModel\PostWasPublished;
+namespace CQRSBlog\BlogEngine\DomainModel;
 
 interface PostProjection extends Projection
 {

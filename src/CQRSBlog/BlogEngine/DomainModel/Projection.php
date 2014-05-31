@@ -1,6 +1,6 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Query;
+namespace CQRSBlog\BlogEngine\DomainModel;
 
 use Buttercup\Protects\DomainEvents;
 

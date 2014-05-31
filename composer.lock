@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "05e654f9495edb19a2fac687d4f5c679",
+    "hash": "8671932027ccf7902fb091a1cec0e5e6",
     "packages": [
         {
             "name": "buttercup/protects",
@@ -634,6 +634,98 @@
                 "dependency injection"
             ],
             "time": "2013-11-22 08:30:29"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v0.8.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "5f2eea628eb465d866ad2771927d83769c8f956c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/5f2eea628eb465d866ad2771927d83769c8f956c",
+                "reference": "5f2eea628eb465d866ad2771927d83769c8f956c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Predis": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2014-01-16 14:10:29"
+        },
+        {
+            "name": "predis/service-provider",
+            "version": "v0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/PredisServiceProvider.git",
+                "reference": "41a6176a45f79e3e0bd50fdd6662b30f7ec1153e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/PredisServiceProvider/zipball/41a6176a45f79e3e0bd50fdd6662b30f7ec1153e",
+                "reference": "41a6176a45f79e3e0bd50fdd6662b30f7ec1153e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "predis/predis": "~0.8.3@stable",
+                "silex/silex": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Predis\\Silex": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Predis service provider for the Silex microframework",
+            "homepage": "https://github.com/nrk/PredisServiceProvider",
+            "keywords": [
+                "predis",
+                "redis",
+                "silex"
+            ],
+            "time": "2013-10-18 18:02:18"
         },
         {
             "name": "psr/log",
@@ -2571,16 +2663,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.6",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "bccecf50645068b44f49a84009e2a0499a500b99"
+                "reference": "58401826c8cfc8fd689b60026e91c337df374bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/bccecf50645068b44f49a84009e2a0499a500b99",
-                "reference": "bccecf50645068b44f49a84009e2a0499a500b99",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/58401826c8cfc8fd689b60026e91c337df374bca",
+                "reference": "58401826c8cfc8fd689b60026e91c337df374bca",
                 "shasum": ""
             },
             "require": {
@@ -2632,7 +2724,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-30 09:01:21"
+            "time": "2014-05-26 14:55:24"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3270,8 +3362,6 @@
     "stability-flags": {
         "buttercup/protects": 20
     },
-    "platform": {
-        "ext-mongo": "*"
-    },
+    "platform": [],
     "platform-dev": []
 }

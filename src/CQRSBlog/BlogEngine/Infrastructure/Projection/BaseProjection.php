@@ -3,7 +3,7 @@
 namespace CQRSBlog\BlogEngine\Infrastructure\Projection;
 
 use Buttercup\Protects\DomainEvents;
-use CQRSBlog\BlogEngine\Query\Projection;
+use CQRSBlog\BlogEngine\DomainModel\Projection;
 use Verraes\ClassFunctions\ClassFunctions;
 
 abstract class BaseProjection implements Projection
