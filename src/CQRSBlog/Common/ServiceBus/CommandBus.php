@@ -1,11 +1,10 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Command;
+namespace CQRSBlog\Common\ServiceBus;
 
-use CQRSBlog\BlogEngine\Command\Handler\HandlerNotFoundException;
 use Verraes\ClassFunctions\ClassFunctions;
 
-final class CommandBus
+class CommandBus
 {
     private $commandHandlers = [];
 

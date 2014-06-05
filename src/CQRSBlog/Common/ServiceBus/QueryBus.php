@@ -1,11 +1,10 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Query;
+namespace CQRSBlog\Common\ServiceBus;
 
-use CQRSBlog\BlogEngine\Query\Handler\HandlerNotFoundException;
 use Verraes\ClassFunctions\ClassFunctions;
 
-final class QueryBus
+class QueryBus
 {
     private $queryHandlers = [];
 

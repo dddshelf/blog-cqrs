@@ -2,6 +2,8 @@
 
 namespace CQRSBlog\BlogEngine\DomainModel;
 
+use CQRSBlog\Common\DomainModel\Projection;
+
 interface PostProjection extends Projection
 {
     /**
@@ -11,7 +13,7 @@ interface PostProjection extends Projection
      *
      * @return void
      */
-    public function handlePostWasCreated(PostWasCreated $event);
+    public function projectPostWasCreated(PostWasCreated $event);
 
     /**
      * Projects when a post was published
@@ -20,7 +22,7 @@ interface PostProjection extends Projection
      *
      * @return void
      */
-    public function handlePostWasPublished(PostWasPublished $event);
+    public function projectPostWasPublished(PostWasPublished $event);
 
     /**
      * Projects when a post title was changed
@@ -29,7 +31,7 @@ interface PostProjection extends Projection
      *
      * @return void
      */
-    public function handlePostTitleWasChanged(PostTitleWasChanged $event);
+    public function projectPostTitleWasChanged(PostTitleWasChanged $event);
 
     /**
      * Projects when a post content was changed
@@ -38,5 +40,14 @@ interface PostProjection extends Projection
      *
      * @return void
      */
-    public function handlePostContentWasChanged(PostContentWasChanged $event);
+    public function projectPostContentWasChanged(PostContentWasChanged $event);
+
+    /**
+     * Projects when a comment is added
+     *
+     * @param CommentWasAdded $event
+     *
+     * @return void
+     */
+    public function projectCommentWasAdded(CommentWasAdded $event);
 }

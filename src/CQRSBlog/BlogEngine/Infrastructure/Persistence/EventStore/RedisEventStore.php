@@ -7,7 +7,7 @@ use Buttercup\Protects\DomainEvents;
 use Buttercup\Protects\IdentifiesAggregate;
 use Predis\Client;
 
-final class RedisEventStore implements EventStore
+class RedisEventStore implements EventStore
 {
     /**
      * @var Client
@@ -19,11 +19,11 @@ final class RedisEventStore implements EventStore
         $this->predis = $predis;
     }
 
-    public function commit(DomainEvents $events)
+    public function commit(DomainEvents $events, $anSnapshot = null)
     {
         foreach ($events as $event) {
             $this->predis->rpush(
-                $this->computeHashFor((string) $event->getAggregateId()),
+                $this->computeHashFor($event->getAggregateId()),
                 serialize($event)
             );
         }
@@ -31,10 +31,10 @@ final class RedisEventStore implements EventStore
 
     public function getAggregateHistoryFor(IdentifiesAggregate $id)
     {
-        $anAggregateId = (string) $id;
-        $serializedEvents = $this->predis->lrange($this->computeHashFor($anAggregateId), 0, -1);
+        $serializedEvents = $this->predis->lrange($this->computeHashFor($id), 0, -1);
 
         $eventStream = [];
+
         foreach ($serializedEvents as $serializedEvent) {
             $eventStream[] = unserialize($serializedEvent);
         }
@@ -42,7 +42,7 @@ final class RedisEventStore implements EventStore
         return new AggregateHistory($id, $eventStream);
     }
 
-    private function computeHashFor($anAggregateId)
+    private function computeHashFor(IdentifiesAggregate $anAggregateId)
     {
         return sprintf('events:%s', $anAggregateId);
     }

@@ -10,9 +10,10 @@ interface EventStore
 {
     /**
      * @param DomainEvents $events
+     * @param string $anSnapshot
      * @return void
      */
-    public function commit(DomainEvents $events);
+    public function commit(DomainEvents $events, $anSnapshot = null);
 
     /**
      * @param IdentifiesAggregate $id

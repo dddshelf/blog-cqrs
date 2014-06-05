@@ -2,7 +2,7 @@
 
 namespace CQRSBlog\BlogEngine\Command;
 
-final class PublishPostCommand
+class PublishPostCommand
 {
     /**
      * @var string

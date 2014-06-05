@@ -1,11 +1,11 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Query\Handler;
+namespace CQRSBlog\BlogEngine\Query;
 
 use CQRSBlog\BlogEngine\DomainModel\PostViewRepository;
 use CQRSBlog\BlogEngine\Query\PostQuery;
 
-final class PostQueryHandler
+class PostQueryHandler
 {
     /**
      * @var PostViewRepository
@@ -19,6 +19,6 @@ final class PostQueryHandler
 
     public function handle(PostQuery $aPostQuery)
     {
-        return $this->postViewRepository->find($aPostQuery->getId());
+        return $this->postViewRepository->get($aPostQuery->getId());
     }
 }

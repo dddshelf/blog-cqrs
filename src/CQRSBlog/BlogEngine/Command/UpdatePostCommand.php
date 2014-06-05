@@ -2,7 +2,7 @@
 
 namespace CQRSBlog\BlogEngine\Command;
 
-final class UpdatePostCommand
+class UpdatePostCommand
 {
     private $postId;
     private $title;

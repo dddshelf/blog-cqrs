@@ -5,7 +5,7 @@ namespace CQRSBlog\BlogEngine\DomainModel;
 use Buttercup\Protects\IdentifiesAggregate;
 use Rhumsaa\Uuid\Uuid;
 
-final class PostId implements IdentifiesAggregate
+class PostId implements IdentifiesAggregate
 {
     private $postId;
 

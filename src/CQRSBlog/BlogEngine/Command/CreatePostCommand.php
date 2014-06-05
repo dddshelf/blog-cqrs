@@ -2,7 +2,7 @@
 
 namespace CQRSBlog\BlogEngine\Command;
 
-final class CreatePostCommand
+class CreatePostCommand
 {
     private $title;
     private $content;

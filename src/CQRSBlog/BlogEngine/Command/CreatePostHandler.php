@@ -1,13 +1,13 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Command\Handler;
+namespace CQRSBlog\BlogEngine\Command;
 
 use CQRSBlog\BlogEngine\Command\CreatePostCommand;
 use CQRSBlog\BlogEngine\DomainModel\Post;
 use CQRSBlog\BlogEngine\DomainModel\PostId;
 use CQRSBlog\BlogEngine\DomainModel\PostRepository;
 
-final class CreatePostHandler
+class CreatePostHandler
 {
     /**
      * @var PostRepository

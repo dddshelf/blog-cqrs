@@ -2,7 +2,7 @@
 
 namespace CQRSBlog\BlogEngine\Query;
 
-final class PostQuery
+class PostQuery
 {
     /**
      * @var string

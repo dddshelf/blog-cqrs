@@ -6,10 +6,10 @@ use Buttercup\Protects\IdentifiesAggregate;
 use Buttercup\Protects\IsEventSourced;
 use Buttercup\Protects\RecordsEvents;
 use CQRSBlog\BlogEngine\DomainModel\Post;
+use CQRSBlog\BlogEngine\DomainModel\PostProjection;
 use CQRSBlog\BlogEngine\DomainModel\PostRepository as BasePostRepository;
-use CQRSBlog\BlogEngine\Query\PostProjection;
 
-final class PostRepository implements BasePostRepository
+class PostRepository implements BasePostRepository
 {
     /**
      * @var EventStore

@@ -9,7 +9,7 @@ use Buttercup\Protects\IsEventSourced;
 use Buttercup\Protects\RecordsEvents;
 use Verraes\ClassFunctions\ClassFunctions;
 
-final class Post implements RecordsEvents, IsEventSourced
+class Post implements RecordsEvents, IsEventSourced
 {
     const STATE_DRAFT = 10;
     const STATE_PUBLISHED = 20;
@@ -39,7 +39,12 @@ final class Post implements RecordsEvents, IsEventSourced
      */
     private $state;
 
-    private function __construct($postId, $content, $title, $state)
+    /**
+     * @var Comment[]
+     */
+    private $comments;
+
+    private function __construct($postId, $content, $title, $state, array $comments = [])
     {
         $this->postId = $postId;
         $this->content = $content;
@@ -59,6 +64,7 @@ final class Post implements RecordsEvents, IsEventSourced
     /**
      * Get all the Domain Events that were recorded since the last time it was cleared, or since it was
      * restored from persistence. This does not include events that were recorded prior.
+     *
      * @return DomainEvents
      */
     public function getRecordedEvents()
@@ -88,29 +94,40 @@ final class Post implements RecordsEvents, IsEventSourced
 
     public function publish()
     {
-        $this->state = static::STATE_PUBLISHED;
+        $aDomainEvent = new PostWasPublished($this->postId);
+        $this->recordThat($aDomainEvent);
 
-        $this->recordThat(
-            new PostWasPublished($this->postId)
-        );
+        $this->apply($aDomainEvent);
     }
 
     public function changeTitle($aNewTitle)
     {
-        $this->title = $aNewTitle;
+        $aDomainEvent = new PostTitleWasChanged($this->postId, $aNewTitle);
+        $this->recordThat($aDomainEvent);
 
-        $this->recordThat(
-            new PostTitleWasChanged($this->postId, $aNewTitle)
-        );
+        $this->apply($aDomainEvent);
     }
 
     public function changeContent($aNewContent)
     {
-        $this->content = $aNewContent;
+        $anEvent = new PostContentWasChanged($this->postId, $aNewContent);
 
         $this->recordThat(
-            new PostContentWasChanged($this->postId, $aNewContent)
+            $anEvent
         );
+
+        $this->apply($anEvent);
+    }
+
+    public function comment($aNewComment)
+    {
+        $aCommentWasAddedEvent = new CommentWasAdded($this->postId, CommentId::generate(), $aNewComment);
+
+        $this->recordThat(
+            $aCommentWasAddedEvent
+        );
+
+        $this->apply($aCommentWasAddedEvent);
     }
 
     private function recordThat(DomainEvent $aDomainEvent)
@@ -119,16 +136,17 @@ final class Post implements RecordsEvents, IsEventSourced
     }
 
     /**
-     * @param AggregateHistory $aggregateHistory
+     * Allow to reconstitute an aggregate from an aggregate events history and an initial state
+     *
+     * @param AggregateHistory $anAggregateHistory
+     *
      * @return RecordsEvents
      */
-    public static function reconstituteFrom(AggregateHistory $aggregateHistory)
+    public static function reconstituteFrom(AggregateHistory $anAggregateHistory)
     {
-        $aPostId = $aggregateHistory->getAggregateId();
+        $aPost = static::createEmptyPostWith($anAggregateHistory->getAggregateId());
 
-        $aPost = static::createEmptyPostWith($aPostId);
-
-        foreach ($aggregateHistory as $anEvent) {
+        foreach ($anAggregateHistory as $anEvent) {
             $aPost->apply($anEvent);
         }
 
@@ -157,5 +175,13 @@ final class Post implements RecordsEvents, IsEventSourced
         $this->title = $event->getTitle();
     }
 
+    private function applyPostContentWasChanged(PostContentWasChanged $event)
+    {
+        $this->content = $event->getContent();
+    }
 
+    private function applyCommentWasAdded(CommentWasAdded $event)
+    {
+        $this->comments[] = Comment::create($event->getCommentId(), $event->getComment());
+    }
 }

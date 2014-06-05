@@ -1,15 +1,18 @@
 <?php
 
-use CQRSBlog\BlogEngine\Command\CommandBus;
-use CQRSBlog\BlogEngine\Command\Handler\CreatePostHandler;
-use CQRSBlog\BlogEngine\Command\Handler\PublishPostHandler;
-use CQRSBlog\BlogEngine\Command\Handler\UpdatePostHandler;
+use CQRSBlog\BlogEngine\Query\AllPostsQueryHandler;
+use CQRSBlog\Common\ServiceBus\CommandBus;
+use CQRSBlog\BlogEngine\Command\CommentHandler;
+use CQRSBlog\BlogEngine\Command\CreatePostHandler;
+use CQRSBlog\BlogEngine\Command\PublishPostHandler;
+use CQRSBlog\BlogEngine\Command\UpdatePostHandler;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\PostRepository;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\RedisEventStore;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\Redis\PostViewRepository;
 use CQRSBlog\BlogEngine\Infrastructure\Projection\Redis\PostProjection;
-use CQRSBlog\BlogEngine\Query\Handler\PostQueryHandler;
-use CQRSBlog\BlogEngine\Query\QueryBus;
+use CQRSBlog\BlogEngine\Query\PostQueryHandler;
+use CQRSBlog\Common\ServiceBus\QueryBus;
+
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -66,12 +69,14 @@ $app['command_bus'] = $app->share(function($app) {
     $commandBus->register(new CreatePostHandler($app['post_repository']));
     $commandBus->register(new PublishPostHandler($app['post_repository']));
     $commandBus->register(new UpdatePostHandler($app['post_repository']));
+    $commandBus->register(new CommentHandler($app['post_repository']));
     return $commandBus;
 });
 
 $app['query_bus'] = $app->share(function($app) {
     $commandBus = new QueryBus();
     $commandBus->register(new PostQueryHandler($app['post_view_repository']));
+    $commandBus->register(new AllPostsQueryHandler($app['post_view_repository']));
     return $commandBus;
 });
 

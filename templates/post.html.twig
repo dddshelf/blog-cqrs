@@ -3,4 +3,13 @@
 {% block content %}
 <h1>{{ post.title }}</h1>
 <p>{{ post.content }}</p>
+{% if post.comments|length > 0 %}
+<ul>
+    {% for comment in post.comments %}
+    <li>{{ comment.comment }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Write a comment to the post</h2>
+{{ form(form, {'action': path('comment', { 'id': post.id }), 'method': 'POST'}) }}
 {% endblock %}

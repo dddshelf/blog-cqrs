@@ -1,12 +1,12 @@
 <?php
 
-namespace CQRSBlog\BlogEngine\Command\Handler;
+namespace CQRSBlog\BlogEngine\Command;
 
 use CQRSBlog\BlogEngine\Command\UpdatePostCommand;
 use CQRSBlog\BlogEngine\DomainModel\PostId;
 use CQRSBlog\BlogEngine\DomainModel\PostRepository;
 
-final class UpdatePostHandler
+class UpdatePostHandler
 {
     /**
      * @var PostRepository

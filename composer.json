@@ -24,7 +24,8 @@
         "symfony/serializer": "~2.4",
         "jms/serializer": "0.*",
         "predis/predis": "~0.8",
-        "predis/service-provider": "~0.4"
+        "predis/service-provider": "~0.4",
+        "cboden/Ratchet": "0.3.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1",

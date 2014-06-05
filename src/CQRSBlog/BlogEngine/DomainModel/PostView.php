@@ -2,7 +2,7 @@
 
 namespace CQRSBlog\BlogEngine\DomainModel;
 
-final class PostView
+class PostView
 {
     /**
      * @var string
@@ -19,11 +19,17 @@ final class PostView
      */
     private $content;
 
-    public function __construct($id, $title, $content)
+    /**
+     * @var array
+     */
+    private $comments;
+
+    public function __construct($id, $title, $content, array $comments = [])
     {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
+        $this->comments = $comments;
     }
 
     /**
@@ -48,5 +54,13 @@ final class PostView
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

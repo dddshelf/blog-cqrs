@@ -1,43 +1,50 @@
 <?php
 
+use CQRSBlog\BlogEngine\Command\CommentCommand;
 use CQRSBlog\BlogEngine\Command\CreatePostCommand;
 use CQRSBlog\BlogEngine\Command\PublishPostCommand;
 use CQRSBlog\BlogEngine\Command\UpdatePostCommand;
-use CQRSBlog\BlogEngine\DomainModel\PostId;
+use CQRSBlog\BlogEngine\Query\AllPostsQuery;
 use CQRSBlog\BlogEngine\Query\PostQuery;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-//Request::setTrustedProxies(array('127.0.0.1'));
+$app
+    ->get(
+        '/',
+        function () use ($app)
+        {
+            $allPostsQuery = new AllPostsQuery();
+            $posts = $app['query_bus']->handle($allPostsQuery);
 
-$app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html', array());
-})
-->bind('homepage')
+            return $app['twig']->render('index.html.twig', array('posts' => $posts));
+        }
+    )
+    ->bind('homepage')
 ;
 
-$app->get(
-    '/post/new',
-    function () use ($app)
-    {
-        $aPostCommand = new CreatePostCommand(
-            'Write a blog post',
-            'The Post title'
-        );
+$app
+    ->get(
+        '/post/new',
+        function () use ($app)
+        {
+            $aPostCommand = new CreatePostCommand(
+                'Write a blog post',
+                'The Post title'
+            );
 
-        $form = $app['form.factory']->createBuilder('form', $aPostCommand)
-            ->add('title', 'text')
-            ->add('content', 'text')
-            ->add('save', 'submit')
-            ->getForm()
-        ;
+            $form = $app['form.factory']->createBuilder('form', $aPostCommand)
+                ->add('title', 'text')
+                ->add('content', 'text')
+                ->add('save', 'submit')
+                ->getForm()
+            ;
 
-        return $app['twig']->render('new_post.html.twig', ['form' => $form->createView()]);
-    }
-);
+            return $app['twig']->render('new_post.html.twig', ['form' => $form->createView()]);
+        }
+    )
+    ->bind('new_post')
+;
 
 $app
     ->post(
@@ -77,16 +84,25 @@ $app
     ->bind('create_post')
 ;
 
-$app->get(
-    '/post/show/{id}',
-    function ($id) use ($app)
-    {
-        $postQuery = new PostQuery($id);
-        $post = $app['query_bus']->handle($postQuery);
+$app
+    ->get(
+        '/post/show/{id}',
+        function ($id) use ($app)
+        {
+            $postQuery = new PostQuery($id);
+            $post = $app['query_bus']->handle($postQuery);
 
-        return $app['twig']->render('post.html.twig', ['post' => $post]);
-    }
-);
+            $form = $app['form.factory']->createBuilder('form', ['comment' => 'Write a comment'])
+                ->add('comment', 'textarea')
+                ->add('save', 'submit')
+                ->getForm()
+            ;
+
+            return $app['twig']->render('post.html.twig', ['post' => $post, 'form' => $form->createView()]);
+        }
+    )
+    ->bind('post')
+;
 
 $app
     ->get(
@@ -113,7 +129,46 @@ $app
     )
 ;
 
-$app->error(function (\Exception $e, $code) use ($app) {
+$app
+    ->post(
+        '/post/{id}/comment',
+        function ($id, Request $request) use ($app)
+        {
+            $data = [
+                'comment' => 'Write a comment'
+            ];
+
+            $form = $app['form.factory']->createBuilder('form', $data)
+                ->add('comment', 'textarea')
+                ->add('save', 'submit')
+                ->getForm()
+            ;
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $data = $form->getData();
+
+                $aCommentCommand = new CommentCommand(
+                    $id,
+                    $data['comment']
+                );
+
+                $app['command_bus']->handle($aCommentCommand);
+
+                return Response::create('Post comment created!');
+            }
+
+            $postQuery = new PostQuery($id);
+            $post = $app['query_bus']->handle($postQuery);
+
+            return $app['twig']->render('post.html.twig', ['post' => $post, 'form' => $form->createView()]);
+        }
+    )
+    ->bind('comment')
+;
+
+$app->error(function (Exception $e, $code) use ($app) {
     if ($app['debug']) {
         return;
     }

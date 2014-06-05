@@ -6,7 +6,7 @@ use CQRSBlog\BlogEngine\DomainModel\PostView;
 use CQRSBlog\BlogEngine\DomainModel\PostViewRepository as BasePostViewRepository;
 use Predis\Client;
 
-final class PostViewRepository implements BasePostViewRepository
+class PostViewRepository implements BasePostViewRepository
 {
     /**
      * @var Client
@@ -25,10 +25,37 @@ final class PostViewRepository implements BasePostViewRepository
      *
      * @return PostView
      */
-    public function find($id)
+    public function get($id)
     {
         $rawPostView = $this->predis->hgetall(sprintf('posts:%s', $id));
 
-        return new PostView($id, $rawPostView['title'], $rawPostView['content']);
+        return new PostView(
+            $id,
+            $rawPostView['title'],
+            $rawPostView['content'],
+            isset($rawPostView['comments']) ? unserialize($rawPostView['comments']) : []
+        );
+    }
+
+    /**
+     * Get all of the post views
+     *
+     * @return PostView[]
+     */
+    public function all()
+    {
+        $postsId = $this->predis->lrange('posts', 0, -1);
+
+        if (empty($postsId)) {
+            return [];
+        }
+
+        $posts = [];
+
+        foreach ($postsId as $postId) {
+            $posts[] = $this->get(explode(':', $postId)[1]);
+        }
+
+        return $posts;
     }
 }

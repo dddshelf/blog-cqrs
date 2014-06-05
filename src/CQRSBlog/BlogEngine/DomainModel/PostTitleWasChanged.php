@@ -5,7 +5,7 @@ namespace CQRSBlog\BlogEngine\DomainModel;
 use Buttercup\Protects\DomainEvent;
 use Buttercup\Protects\IdentifiesAggregate;
 
-final class PostTitleWasChanged implements DomainEvent
+class PostTitleWasChanged implements DomainEvent
 {
     /**
      * @var PostId
