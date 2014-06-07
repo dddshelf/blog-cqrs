@@ -56,7 +56,7 @@ $app['serializer'] = $app->share(function($app) {
 });
 
 $app['post_projection'] = $app->share(function($app) {
-    return new PostProjection($app['predis']);
+    return new PostProjection($app['predis'], $app['serializer']);
 });
 
 $app['event_store'] = $app->share(function($app) {
@@ -68,7 +68,7 @@ $app['post_repository'] = $app->share(function($app) {
 });
 
 $app['post_view_repository'] = $app->share(function($app) {
-    return new PostViewRepository($app['predis']);
+    return new PostViewRepository($app['predis'], $app['serializer']);
 });
 
 $app['command_bus'] = $app->share(function($app) {

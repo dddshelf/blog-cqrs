@@ -10,6 +10,7 @@ use CQRSBlog\BlogEngine\DomainModel\PostTitleWasChanged;
 use CQRSBlog\BlogEngine\DomainModel\PostWasCreated;
 use CQRSBlog\BlogEngine\DomainModel\PostWasPublished;
 use CQRSBlog\BlogEngine\Infrastructure\Projection\BaseProjection;
+use JMS\Serializer\Serializer;
 use Predis\Client;
 
 class PostProjection extends BaseProjection implements BasePostProjection
@@ -19,9 +20,15 @@ class PostProjection extends BaseProjection implements BasePostProjection
      */
     private $predis;
 
-    public function __construct($predis)
+    /**
+     * @var Serializer
+     */
+    private $serializer;
+
+    public function __construct($predis, $serializer)
     {
         $this->predis = $predis;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -115,20 +122,31 @@ class PostProjection extends BaseProjection implements BasePostProjection
      */
     public function projectCommentWasAdded(CommentWasAdded $event)
     {
-        $comments = unserialize($this->predis->hget(
+        $rawComments = $this->predis->hget(
             $this->computePostHashFor($event->getAggregateId()),
             'comments'
-        ));
+        );
+
+        $comments = [];
+
+        if (null !== $rawComments) {
+            $comments = $this->serializer->deserialize(
+                $rawComments,
+                'array',
+                'json'
+            );
+        }
+
 
         $comments[] = [
-            'commentId' => $event->getCommentId(),
+            'commentId' => (string) $event->getCommentId(),
             'comment'   => $event->getComment()
         ];
 
         $this->predis->hset(
             $this->computePostHashFor($event->getAggregateId()),
             'comments',
-            serialize($comments)
+            $this->serializer->serialize($comments, 'json')
         );
     }
 }

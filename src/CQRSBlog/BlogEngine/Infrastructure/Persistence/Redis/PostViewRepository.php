@@ -4,6 +4,7 @@ namespace CQRSBlog\BlogEngine\Infrastructure\Persistence\Redis;
 
 use CQRSBlog\BlogEngine\DomainModel\PostView;
 use CQRSBlog\BlogEngine\DomainModel\PostViewRepository as BasePostViewRepository;
+use JMS\Serializer\Serializer;
 use Predis\Client;
 
 class PostViewRepository implements BasePostViewRepository
@@ -13,9 +14,15 @@ class PostViewRepository implements BasePostViewRepository
      */
     private $predis;
 
-    public function __construct($predis)
+    /**
+     * @var Serializer
+     */
+    private $serializer;
+
+    public function __construct($predis, $serializer)
     {
         $this->predis = $predis;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -33,7 +40,7 @@ class PostViewRepository implements BasePostViewRepository
             $id,
             $rawPostView['title'],
             $rawPostView['content'],
-            isset($rawPostView['comments']) ? unserialize($rawPostView['comments']) : []
+            isset($rawPostView['comments']) ? $this->serializer->deserialize($rawPostView['comments'], 'array', 'json') : []
         );
     }
 
