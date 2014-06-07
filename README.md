@@ -26,7 +26,7 @@ Next you have to update your hosts file (usually located at */etc/hosts*), with 
 
 From the root application folder, run
 
-    vagrant up
+    vagrant up --provision
     
 When vagrant finishes bootstraping the VM, open up a browser and go to
 
