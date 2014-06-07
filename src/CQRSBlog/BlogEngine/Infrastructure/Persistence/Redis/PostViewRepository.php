@@ -44,15 +44,15 @@ class PostViewRepository implements BasePostViewRepository
      */
     public function all()
     {
-        $postsId = $this->predis->lrange('posts', 0, -1);
+        $postIds = $this->predis->lrange('posts', 0, -1);
 
-        if (empty($postsId)) {
+        if (empty($postIds)) {
             return [];
         }
 
         $posts = [];
 
-        foreach ($postsId as $postId) {
+        foreach ($postIds as $postId) {
             $posts[] = $this->get(explode(':', $postId)[1]);
         }
 

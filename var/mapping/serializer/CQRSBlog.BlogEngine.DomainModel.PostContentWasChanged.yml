@@ -1,0 +1,10 @@
+CQRSBlog\BlogEngine\DomainModel\PostContentWasChanged:
+    exclusion_policy: ALL
+
+    properties:
+        postId:
+            type: CQRSBlog\BlogEngine\DomainModel\PostId
+            serialized_name: post_id
+
+        content:
+            type: string

@@ -1,5 +1,9 @@
 <?php
 
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapBadgeExtension;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapFormExtension;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapIconExtension;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapLabelExtension;
 use CQRSBlog\BlogEngine\Query\AllPostsQueryHandler;
 use CQRSBlog\Common\ServiceBus\CommandBus;
 use CQRSBlog\BlogEngine\Command\CommentHandler;
@@ -15,7 +19,6 @@ use CQRSBlog\Common\ServiceBus\QueryBus;
 
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
-use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -23,17 +26,21 @@ use Silex\Provider\ServiceControllerServiceProvider;
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ValidatorServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), ['locale_fallbacks' => array('en')]);
-$app->register(new TwigServiceProvider());
+$app->register(new Silex\Provider\TwigServiceProvider(), ['twig.form.templates' => ['bootstrap.html.twig']]);
 $app->register(new Predis\Silex\PredisServiceProvider(), [
     'predis.parameters' => 'tcp://127.0.0.1:6379',
     'predis.options'    => ['profile' => '2.2'],
 ]);
 
-$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
-    // add custom globals, filters, tags, ...
+$app['twig'] = $app->share($app->extend('twig', function($twig) {
+    $twig->addExtension(new BootstrapIconExtension);
+    $twig->addExtension(new BootstrapLabelExtension);
+    $twig->addExtension(new BootstrapBadgeExtension);
+    $twig->addExtension(new BootstrapFormExtension);
 
     return $twig;
 }));
@@ -53,7 +60,7 @@ $app['post_projection'] = $app->share(function($app) {
 });
 
 $app['event_store'] = $app->share(function($app) {
-    return new RedisEventStore($app['predis']);
+    return new RedisEventStore($app['predis'], $app['serializer']);
 });
 
 $app['post_repository'] = $app->share(function($app) {

@@ -23,8 +23,8 @@ apt-get -y -qq install git build-essential gettext pkg-config redis-server apach
 echo 'Done.'
 
 echo 'Installing PHPREDMIN'
-wget https://github.com/sasanrose/phpredmin/archive/master.zip
-unzip master.zip
+wget https://github.com/sasanrose/phpredmin/archive/master.zip > /dev/null 2>&1
+unzip -qq master.zip > /dev/null 2>&1
 mv phpredmin-master /var/www/phpredmin
 echo '# phpredmin - Simple web interface to manage and monitor your Redis
 #
@@ -45,6 +45,7 @@ echo '# phpredmin - Simple web interface to manage and monitor your Redis
     ErrorLog /var/log/apache2/redis.mydddblog.dev.log
     CustomLog /var/log/apache2/redis.mydddblog.dev.log combined
 </VirtualHost>' > /etc/apache2/sites-available/phpredmin
+a2ensite phpredmin
 echo 'Done.'
 
 echo 'Enabling & Configuring PHP APACHE MODULE'

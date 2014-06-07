@@ -35,7 +35,7 @@ $app
 
             $form = $app['form.factory']->createBuilder('form', $aPostCommand)
                 ->add('title', 'text')
-                ->add('content', 'text')
+                ->add('content', 'textarea')
                 ->add('save', 'submit')
                 ->getForm()
             ;
@@ -58,7 +58,7 @@ $app
 
             $form = $app['form.factory']->createBuilder('form', $data)
                 ->add('title', 'text')
-                ->add('content', 'text')
+                ->add('content', 'textarea')
                 ->add('save', 'submit')
                 ->getForm()
             ;
@@ -75,7 +75,8 @@ $app
 
                 $app['command_bus']->handle($aPostCommand);
 
-                return Response::create('Post created!');
+                $app['session']->getFlashBag()->add('notices', 'Post was created!');
+                return $app->redirect($app['url_generator']->generate('homepage'));
             }
 
             return $app['twig']->render('new_post.html.twig', ['form' => $form->createView()]);
@@ -110,7 +111,9 @@ $app
         function ($id) use ($app)
         {
             $app['command_bus']->handle(new PublishPostCommand($id));
-            return Response::create('Post published!');
+
+            $app['session']->getFlashBag()->add('notices', 'Post was published!');
+            return $app->redirect($app['url_generator']->generate('post', ['id' => $id]));
         }
     )
 ;
@@ -124,7 +127,9 @@ $app
             $content = 'This is an update test for the content';
 
             $app['command_bus']->handle(new UpdatePostCommand($id, $content, $title));
-            return Response::create('Post was updated!');
+
+            $app['session']->getFlashBag()->add('notices', 'Post was updated!');
+            return $app->redirect($app['url_generator']->generate('post', ['id' => $id]));
         }
     )
 ;
@@ -156,7 +161,8 @@ $app
 
                 $app['command_bus']->handle($aCommentCommand);
 
-                return Response::create('Post comment created!');
+                $app['session']->getFlashBag()->add('notices', 'Comment was added!');
+                return $app->redirect($app['url_generator']->generate('post', ['id' => $id]));
             }
 
             $postQuery = new PostQuery($id);

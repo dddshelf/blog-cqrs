@@ -1,0 +1,6 @@
+CQRSBlog\BlogEngine\DomainModel\CommentId:
+    exclusion_policy: ALL
+    properties:
+        commentId:
+            type: string
+            serialized_name: comment_id

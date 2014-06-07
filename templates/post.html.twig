@@ -1,15 +1,22 @@
 {% extends "layout.html.twig" %}
 
+{% block title post.title %}
+
 {% block content %}
-<h1>{{ post.title }}</h1>
+<div class="page-header">
+    <h1>{{ post.title }}</h1>
+</div>
 <p>{{ post.content }}</p>
 {% if post.comments|length > 0 %}
-<ul>
-    {% for comment in post.comments %}
-    <li>{{ comment.comment }}</li>
-    {% endfor %}
-</ul>
+    <h2>Comments</h2>
+    <ul class="comments">
+        {% for comment in post.comments %}
+        <li class="comment">{{ comment.comment }}</li>
+        {% endfor %}
+    </ul>
 {% endif %}
-<h2>Write a comment to the post</h2>
-{{ form(form, {'action': path('comment', { 'id': post.id }), 'method': 'POST'}) }}
+<div class="page-header">
+    <h3>Write a comment to the post</h3>
+</div>
+{{ form(form, {'action': path('comment', { 'id': post.id }), 'method': 'POST', 'style': 'horizontal'}) }}
 {% endblock %}

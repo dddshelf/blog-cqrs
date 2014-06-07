@@ -33,6 +33,13 @@
         </div>
 
         <div class="container">
+            {% for notice in app.session.getFlashBag.get('notices') %}
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Good job!</strong> {{ notice }}
+            </div>
+            {% endfor %}
+
             {% block content %}{% endblock %}
         </div>
 

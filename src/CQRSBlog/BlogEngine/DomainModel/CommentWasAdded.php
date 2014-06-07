@@ -13,6 +13,11 @@ class CommentWasAdded implements DomainEvent
     private $postId;
 
     /**
+     * @var CommentId
+     */
+    private $commentId;
+
+    /**
      * @var Comment
      */
     private $comment;
@@ -26,6 +31,7 @@ class CommentWasAdded implements DomainEvent
 
     /**
      * The Aggregate this event belongs to.
+     *
      * @return IdentifiesAggregate
      */
     public function getAggregateId()

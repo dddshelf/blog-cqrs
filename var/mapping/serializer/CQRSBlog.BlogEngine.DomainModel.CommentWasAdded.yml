@@ -1,0 +1,14 @@
+CQRSBlog\BlogEngine\DomainModel\CommentWasAdded:
+    exclusion_policy: ALL
+
+    properties:
+        postId:
+            type: CQRSBlog\BlogEngine\DomainModel\PostId
+            serialized_name: post_id
+
+        commentId:
+            type: CQRSBlog\BlogEngine\DomainModel\CommentId
+            serialized_name: comment_id
+
+        comment:
+            type: string
