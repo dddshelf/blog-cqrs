@@ -26,6 +26,7 @@ echo 'Installing PHPREDMIN'
 wget https://github.com/sasanrose/phpredmin/archive/master.zip > /dev/null 2>&1
 unzip -qq master.zip > /dev/null 2>&1
 mv phpredmin-master /var/www/phpredmin
+chown -R vagrant:vagrant /var/www/phpredmin
 echo '# phpredmin - Simple web interface to manage and monitor your Redis
 #
 # Allows only localhost by default
