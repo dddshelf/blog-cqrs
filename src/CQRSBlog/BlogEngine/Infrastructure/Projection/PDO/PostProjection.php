@@ -125,10 +125,10 @@ class PostProjection extends BaseProjection implements BasePostProjection
         $stmt->execute([
             ':post_id' => $event->getAggregateId(),
             ':comment_id' => $event->getCommentId(),
-            ':title' => $post['title'],
-            ':content' => $post['content'],
-            ':state' => $post['state'],
-            ':comment' => $post['comment']
+            ':title' => $post['TITLE'],
+            ':content' => $post['CONTENT'],
+            ':state' => $post['STATE'],
+            ':comment' => $post['COMMENT']
         ]);
     }
 }

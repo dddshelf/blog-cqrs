@@ -1,9 +1,7 @@
 <?php
 
-use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapBadgeExtension;
-use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapFormExtension;
-use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapIconExtension;
-use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapLabelExtension;
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\MongoDbEventStore;
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\PDOEventStore;
 use CQRSBlog\BlogEngine\Query\AllPostsQueryHandler;
 use CQRSBlog\Common\ServiceBus\CommandBus;
 use CQRSBlog\BlogEngine\Command\CommentHandler;
@@ -12,8 +10,12 @@ use CQRSBlog\BlogEngine\Command\PublishPostHandler;
 use CQRSBlog\BlogEngine\Command\UpdatePostHandler;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\PostRepository;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\RedisEventStore;
-use CQRSBlog\BlogEngine\Infrastructure\Persistence\Redis\PostViewRepository;
-use CQRSBlog\BlogEngine\Infrastructure\Projection\Redis\PostProjection;
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\Redis\PostViewRepository as RedisPostViewRepository;
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\MongoDb\PostViewRepository as MongoDbPostViewRepository;
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\PDO\PostViewRepository as PDOPostViewRepository;
+use CQRSBlog\BlogEngine\Infrastructure\Projection\Redis\PostProjection as RedisPostProjection;
+use CQRSBlog\BlogEngine\Infrastructure\Projection\MongoDb\PostProjection as MongoDbPostProjection;
+use CQRSBlog\BlogEngine\Infrastructure\Projection\PDO\PostProjection as PDOPostProjection;
 use CQRSBlog\BlogEngine\Query\PostQueryHandler;
 use CQRSBlog\Common\ServiceBus\QueryBus;
 
@@ -22,6 +24,11 @@ use Silex\Provider\FormServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapBadgeExtension;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapFormExtension;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapIconExtension;
+use Braincrafted\Bundle\BootstrapBundle\Twig\BootstrapLabelExtension;
+use CSanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
@@ -35,6 +42,27 @@ $app->register(new Predis\Silex\PredisServiceProvider(), [
     'predis.parameters' => 'tcp://127.0.0.1:6379',
     'predis.options'    => ['profile' => '2.2'],
 ]);
+
+$app->register(new PdoServiceProvider('pdo'), [
+    'pdo.server'   => [
+        'driver'   => 'mysql',
+        'host'     => 'localhost',
+        'dbname'   => 'mydddblog',
+        'port'     => 3306,
+        'user'     => 'mydddblog',
+        'password' => 'myDddbl0g',
+    ],
+    'pdo.options' => [
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
+    ],
+    'pdo.attributes' => array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    ),
+]);
+
+$app['mongo'] = $app->share(function($app) {
+    return new MongoClient();
+});
 
 $app['twig'] = $app->share($app->extend('twig', function($twig) {
     $twig->addExtension(new BootstrapIconExtension);
@@ -55,21 +83,78 @@ $app['serializer'] = $app->share(function($app) {
     ;
 });
 
-$app['post_projection'] = $app->share(function($app) {
-    return new PostProjection($app['predis'], $app['serializer']);
+
+/*******************************************
+ * EVENT STORE CONFIGURATION
+ *******************************************/
+
+$app['event_store.redis'] = $app->share(function($app) {
+    return new RedisEventStore($app['predis'], $app['serializer']);
+});
+
+$app['event_store.mongodb'] = $app->share(function($app) {
+    return new MongoDbEventStore($app['mongo']->dddblog->events, $app['serializer']);
+});
+
+$app['event_store.pdo'] = $app->share(function($app) {
+    return new PDOEventStore($app['pdo'], $app['serializer']);
 });
 
 $app['event_store'] = $app->share(function($app) {
-    return new RedisEventStore($app['predis'], $app['serializer']);
+    return $app['event_store.redis'];
 });
+
+/*******************************************
+ * EVENT STORE REPOSITORIES
+ *******************************************/
 
 $app['post_repository'] = $app->share(function($app) {
     return new PostRepository($app['event_store'], $app['post_projection']);
 });
 
-$app['post_view_repository'] = $app->share(function($app) {
-    return new PostViewRepository($app['predis'], $app['serializer']);
+/*******************************************
+ * PERSISTENCE CONFIGURATION
+ *******************************************/
+
+$app['post_view_repository.redis'] = $app->share(function($app) {
+    return new RedisPostViewRepository($app['predis'], $app['serializer']);
 });
+
+$app['post_view_repository.mongodb'] = $app->share(function($app) {
+    return new MongoDbPostViewRepository($app['mongo']->dddblog->posts);
+});
+
+$app['post_view_repository.pdo'] = $app->share(function($app) {
+    return new PDOPostViewRepository($app['pdo']);
+});
+
+$app['post_view_repository'] = $app->share(function($app) {
+    return $app['post_view_repository.redis'];
+});
+
+/*******************************************
+ * READ MODEL PROJECTIONS
+ *******************************************/
+
+$app['post_projection.redis'] = $app->share(function($app) {
+    return new RedisPostProjection($app['predis'], $app['serializer']);
+});
+
+$app['post_projection.mongodb'] = $app->share(function($app) {
+    return new MongoDbPostProjection($app['mongo']->dddblog->posts, $app['serializer']);
+});
+
+$app['post_projection.pdo'] = $app->share(function($app) {
+    return new PDOPostProjection($app['pdo'], $app['serializer']);
+});
+
+$app['post_projection'] = $app->share(function($app) {
+    return $app['post_projection.redis'];
+});
+
+/*******************************************
+ * COMMAND BUS
+ *******************************************/
 
 $app['command_bus'] = $app->share(function($app) {
     $commandBus = new CommandBus();
@@ -77,13 +162,19 @@ $app['command_bus'] = $app->share(function($app) {
     $commandBus->register(new PublishPostHandler($app['post_repository']));
     $commandBus->register(new UpdatePostHandler($app['post_repository']));
     $commandBus->register(new CommentHandler($app['post_repository']));
+
     return $commandBus;
 });
+
+/*******************************************
+ * QUERY BUS
+ *******************************************/
 
 $app['query_bus'] = $app->share(function($app) {
     $commandBus = new QueryBus();
     $commandBus->register(new PostQueryHandler($app['post_view_repository']));
     $commandBus->register(new AllPostsQueryHandler($app['post_view_repository']));
+
     return $commandBus;
 });
 
