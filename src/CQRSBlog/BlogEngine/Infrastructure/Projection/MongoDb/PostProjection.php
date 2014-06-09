@@ -33,6 +33,10 @@ class PostProjection extends BaseProjection implements BasePostProjection
      */
     public function projectPostWasCreated(PostWasCreated $event)
     {
+        if ($this->postsCollection->count(['post_id' => (string) $event->getAggregateId()]) > 0) {
+            return;
+        }
+
         $this->postsCollection->insert([
             'post_id' => (string) $event->getAggregateId(),
             'title'   => $event->getTitle(),
@@ -52,6 +56,10 @@ class PostProjection extends BaseProjection implements BasePostProjection
     {
         $post = $this->postsCollection->findOne(['post_id' => (string) $event->getAggregateId()]);
 
+        if (null === $post || Post::STATE_PUBLISHED === $post['state']) {
+            return;
+        }
+
         $post['state'] = Post::STATE_PUBLISHED;
 
         $this->postsCollection->save($post);
@@ -68,6 +76,10 @@ class PostProjection extends BaseProjection implements BasePostProjection
     {
         $post = $this->postsCollection->findOne(['post_id' => (string) $event->getAggregateId()]);
 
+        if (null === $post || $event->getTitle() === $post['title']) {
+            return;
+        }
+
         $post['title'] = $event->getTitle();
 
         $this->postsCollection->save($post);
@@ -83,6 +95,10 @@ class PostProjection extends BaseProjection implements BasePostProjection
     public function projectPostContentWasChanged(PostContentWasChanged $event)
     {
         $post = $this->postsCollection->findOne(['post_id' => (string) $event->getAggregateId()]);
+
+        if (null === $post || Post::STATE_PUBLISHED === $post['content']) {
+            return;
+        }
 
         $post['content'] = $event->getContent();
 
@@ -102,6 +118,14 @@ class PostProjection extends BaseProjection implements BasePostProjection
 
         if (!isset($post['comments'])) {
             $post['comments'] = [];
+        }
+
+        $commentAlreadyExists = count(array_filter($post['comments'], function ($comment) use ($event) {
+            return $comment['comment_id'] === $event->getCommentId();
+        })) > 0;
+
+        if ($commentAlreadyExists) {
+            return;
         }
 
         $post['comments'] = [
