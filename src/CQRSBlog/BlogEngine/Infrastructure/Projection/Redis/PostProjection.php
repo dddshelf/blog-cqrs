@@ -137,7 +137,6 @@ class PostProjection extends BaseProjection implements BasePostProjection
             );
         }
 
-
         $comments[] = [
             'commentId' => (string) $event->getCommentId(),
             'comment'   => $event->getComment()
