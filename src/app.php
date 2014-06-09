@@ -78,7 +78,7 @@ $app['serializer'] = $app->share(function($app) {
         JMS\Serializer\SerializerBuilder::create()
             ->setCacheDir(__DIR__ . '/../var/cache/serializer')
             ->setDebug($app['debug'])
-            ->addMetadataDir(__DIR__ . '/../var/mapping/serializer')
+            ->addMetadataDir(__DIR__ . '/../resources/mapping/serializer')
         ->build()
     ;
 });

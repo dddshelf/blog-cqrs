@@ -17,5 +17,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.customize ["modifyvm", :id, "--hpet", "on"]
   end
   
-  config.vm.provision "shell", path: "var/provisioning.sh"
+  config.vm.provision "shell", path: "resources/provisioning.sh"
 end

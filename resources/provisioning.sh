@@ -71,7 +71,7 @@ a2enmod rewrite > /dev/null 2>&1
 a2dissite default > /dev/null 2>&1
 sed -i 's/export APACHE_RUN_USER=www\-data/export APACHE_RUN_USER=vagrant/g' /etc/apache2/envvars > /dev/null 2>&1
 sed -i 's/export APACHE_RUN_GROUP=www\-data/export APACHE_RUN_GROUP=vagrant/g' /etc/apache2/envvars > /dev/null 2>&1
-ln -f -s /var/www/cqrs-blog-engine/var/httpd.conf /etc/apache2/sites-available/mydddblog > /dev/null 2>&1
+ln -f -s /var/www/cqrs-blog-engine/resources/httpd.conf /etc/apache2/sites-available/mydddblog > /dev/null 2>&1
 a2ensite mydddblog > /dev/null 2>&1
 chown -R vagrant:vagrant /var/lock/apache2/ > /dev/null 2>&1
 echo 'Done.'
