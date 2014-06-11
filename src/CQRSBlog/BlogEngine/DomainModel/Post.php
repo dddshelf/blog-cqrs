@@ -94,45 +94,42 @@ class Post implements RecordsEvents, IsEventSourced
 
     public function publish()
     {
-        $aDomainEvent = new PostWasPublished($this->postId);
-        $this->recordThat($aDomainEvent);
-
-        $this->apply($aDomainEvent);
+        $this->applyAndRecordThat(
+            new PostWasPublished($this->postId)
+        );
     }
 
     public function changeTitle($aNewTitle)
     {
-        $aDomainEvent = new PostTitleWasChanged($this->postId, $aNewTitle);
-        $this->recordThat($aDomainEvent);
-
-        $this->apply($aDomainEvent);
+        $this->applyAndRecordThat(
+            new PostTitleWasChanged($this->postId, $aNewTitle)
+        );
     }
 
     public function changeContent($aNewContent)
     {
-        $anEvent = new PostContentWasChanged($this->postId, $aNewContent);
-
-        $this->recordThat(
-            $anEvent
+        $this->applyAndRecordThat(
+            new PostContentWasChanged($this->postId, $aNewContent)
         );
-
-        $this->apply($anEvent);
     }
 
     public function comment($aNewComment)
     {
-        $aCommentWasAddedEvent = new CommentWasAdded($this->postId, CommentId::generate(), $aNewComment);
-
-        $this->recordThat(
-            $aCommentWasAddedEvent
+        $this->applyAndRecordThat(
+            new CommentWasAdded($this->postId, CommentId::generate(), $aNewComment)
         );
-
-        $this->apply($aCommentWasAddedEvent);
     }
 
     private function recordThat(DomainEvent $aDomainEvent)
     {
         $this->recordedEvents[] = $aDomainEvent;
+    }
+
+    private function applyAndRecordThat(DomainEvent $aDomainEvent)
+    {
+        $this->recordThat($aDomainEvent);
+
+        $this->apply($aDomainEvent);
     }
 
     /**

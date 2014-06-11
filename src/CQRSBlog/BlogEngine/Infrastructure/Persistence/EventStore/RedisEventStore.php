@@ -27,7 +27,7 @@ class RedisEventStore implements EventStore
         $this->serializer = $serializer;
     }
 
-    public function commit(DomainEvents $events, $anSnapshot = null)
+    public function commit(DomainEvents $events)
     {
         foreach ($events as $event) {
             $eventType = get_class($event);
