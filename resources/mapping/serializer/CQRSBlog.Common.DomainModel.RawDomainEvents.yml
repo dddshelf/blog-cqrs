@@ -1,0 +1,13 @@
+CQRSBlog\Common\DomainModel\RawDomainEvents:
+    exclusion_policy: ALL
+    xml_root_name: Events
+
+    properties:
+        events:
+            expose: true
+            xml_key_value_pairs: true
+            xml_list:
+                inline: true
+                entry_name: Event
+            xml_element:
+                cdata: false

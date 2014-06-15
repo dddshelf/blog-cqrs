@@ -26,7 +26,8 @@
         "predis/predis": "~0.8",
         "predis/service-provider": "~0.4",
         "braincrafted/bootstrap-bundle": "dev-master",
-        "csanquer/pdo-service-provider": "v0.4.0"
+        "csanquer/pdo-service-provider": "v0.4.0",
+        "guzzlehttp/guzzle": "~4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.1",

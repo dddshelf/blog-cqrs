@@ -1,5 +1,6 @@
 <?php
 
+use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\EventStore;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\MongoDbEventStore;
 use CQRSBlog\BlogEngine\Infrastructure\Persistence\EventStore\PDOEventStore;
 use CQRSBlog\BlogEngine\Query\AllPostsQueryHandler;
@@ -73,6 +74,10 @@ $app['twig'] = $app->share($app->extend('twig', function($twig) {
     return $twig;
 }));
 
+$app['guzzle.client'] = $app->share(function($app) {
+   return new \GuzzleHttp\Client();
+});
+
 $app['serializer'] = $app->share(function($app) {
     return
         JMS\Serializer\SerializerBuilder::create()
@@ -88,20 +93,14 @@ $app['serializer'] = $app->share(function($app) {
  * EVENT STORE CONFIGURATION
  *******************************************/
 
-$app['event_store.redis'] = $app->share(function($app) {
-    return new RedisEventStore($app['predis'], $app['serializer']);
-});
-
-$app['event_store.mongodb'] = $app->share(function($app) {
-    return new MongoDbEventStore($app['mongo']->dddblog->events, $app['serializer']);
-});
-
-$app['event_store.pdo'] = $app->share(function($app) {
-    return new PDOEventStore($app['pdo'], $app['serializer']);
-});
+$app['event_store.host'] = 'eventstore:2113';
 
 $app['event_store'] = $app->share(function($app) {
-    return $app['event_store.redis'];
+    return new EventStore(
+        $app['event_store.host'],
+        $app['guzzle.client'],
+        $app['serializer']
+    );
 });
 
 /*******************************************

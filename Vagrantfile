@@ -5,7 +5,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "puphpet/debian75-x64"
-  config.vm.hostname = "webserver"
+  config.vm.hostname = "eventstore"
   config.vm.network :private_network, ip: "172.21.99.6"
   
   config.vm.synced_folder ".", "/var/www/cqrs-blog-engine", type: "nfs"

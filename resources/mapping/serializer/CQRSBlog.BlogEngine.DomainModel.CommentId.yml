@@ -4,3 +4,5 @@ CQRSBlog\BlogEngine\DomainModel\CommentId:
         commentId:
             type: string
             serialized_name: comment_id
+            xml_element:
+                cdata: false

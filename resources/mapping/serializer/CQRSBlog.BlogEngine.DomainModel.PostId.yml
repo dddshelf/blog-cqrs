@@ -4,3 +4,5 @@ CQRSBlog\BlogEngine\DomainModel\PostId:
         postId:
             type: string
             serialized_name: post_id
+            xml_element:
+                cdata: false

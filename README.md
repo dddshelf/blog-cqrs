@@ -22,6 +22,21 @@ Next you have to update your hosts file (usually located at */etc/hosts*), with 
 
     172.21.99.6 mydddblog.dev www.mydddblog.dev redis.mydddblog.dev
     
+## Running the EventStore
+
+SSH into the VM
+
+    vagrant ssh
+    
+From the VM shell type
+
+    cd /home/vagrant
+    mono-sgen eventstore/EventStore.SingleNode.exe
+    
+If want to checkout the Event Store installation go to the following URL in the browser
+
+**http://www.mydddblog:2113**
+    
 ## Running the application
 
 From the root application folder, run

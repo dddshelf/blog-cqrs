@@ -15,18 +15,22 @@ deb-src http://packages.dotdeb.org wheezy-php55 all' > /etc/apt/sources.list.d/d
 
 wget -q http://www.dotdeb.org/dotdeb.gpg > /dev/null 2>&1
 apt-key add dotdeb.gpg > /dev/null 2>&1
+echo 'Done.'
+
+echo 'Installing MONO sources'
+echo 'deb http://debian.meebey.net/experimental/mono /' > /etc/apt/sources.list.d/mono.list
 apt-get -y -qq update > /dev/null 2>&1
 echo 'Done.'
 
 echo 'Installing base packages'
-apt-get -y -qq install git build-essential gettext pkg-config redis-server apache2 apache2-mpm-prefork php5 php5-dev php-pear php5-curl php5-xdebug php5-mysql php5-cli php5-redis > /dev/null 2>&1
+apt-get -y --force-yes -qq install vim git build-essential gettext pkg-config redis-server apache2 apache2-mpm-prefork php5 php5-dev php-pear php5-curl php5-xdebug php5-mysql php5-cli php5-redis mono-complete > /dev/null 2>&1
 echo 'Done.'
 
 echo 'Installing PHPREDMIN'
-wget https://github.com/sasanrose/phpredmin/archive/master.zip > /dev/null 2>&1
+wget -q https://github.com/sasanrose/phpredmin/archive/master.zip > /dev/null 2>&1
 unzip -qq master.zip > /dev/null 2>&1
-mv phpredmin-master /var/www/phpredmin
-chown -R vagrant:vagrant /var/www/phpredmin
+mv phpredmin-master /var/www/phpredmin > /dev/null 2>&1
+chown -R vagrant:vagrant /var/www/phpredmin > /dev/null 2>&1
 echo '# phpredmin - Simple web interface to manage and monitor your Redis
 #
 # Allows only localhost by default
@@ -46,7 +50,22 @@ echo '# phpredmin - Simple web interface to manage and monitor your Redis
     ErrorLog /var/log/apache2/redis.mydddblog.dev.log
     CustomLog /var/log/apache2/redis.mydddblog.dev.log combined
 </VirtualHost>' > /etc/apache2/sites-available/phpredmin
-a2ensite phpredmin
+a2ensite phpredmin > /dev/null 2>&1
+echo 'Done.'
+
+echo 'Installing EventStore'
+mkdir eventstore > /dev/null 2>&1
+cd eventstore > /dev/null 2>&1
+wget -q http://download.geteventstore.com/binaries/eventstore-mono-2.0.1.tgz > /dev/null 2>&1
+tar -zxf eventstore-mono-2.0.1.tgz > /dev/null 2>&1
+echo '{
+    "ip": "0.0.0.0",
+    "httpPrefixes": {
+        "http://www.mydddblog:2113/", "http://mydddblog:2113/", "http://eventstore:2113"
+    },
+    "db": "/home/vagrant/eventstore/ESData"
+}' > config.json
+cd ../ > /dev/null 2>&1
 echo 'Done.'
 
 echo 'Enabling & Configuring PHP APACHE MODULE'

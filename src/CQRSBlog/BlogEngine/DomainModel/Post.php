@@ -69,7 +69,10 @@ class Post implements RecordsEvents, IsEventSourced
      */
     public function getRecordedEvents()
     {
-        return new DomainEvents($this->recordedEvents);
+        return new AggregateHistory(
+            $this->postId,
+            $this->recordedEvents
+        );
     }
 
     /**
