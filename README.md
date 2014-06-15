@@ -22,6 +22,16 @@ Next you have to update your hosts file (usually located at */etc/hosts*), with 
 
     172.21.99.6 mydddblog.dev www.mydddblog.dev redis.mydddblog.dev
     
+## Running the application
+
+From the root application folder, run
+
+    vagrant up --provision
+    
+When vagrant finishes bootstraping the VM, open up a browser and go to
+
+**http://www.mydddblog.dev**
+
 ## Running the EventStore
 
 SSH into the VM
@@ -36,15 +46,5 @@ From the VM shell type
 If want to checkout the Event Store installation go to the following URL in the browser
 
 **http://www.mydddblog:2113**
-    
-## Running the application
-
-From the root application folder, run
-
-    vagrant up --provision
-    
-When vagrant finishes bootstraping the VM, open up a browser and go to
-
-**http://www.mydddblog.dev**
 
 Have fun!
