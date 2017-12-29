@@ -11,8 +11,8 @@ abstract class BaseProjection implements Projection
     public function project(DomainEvents $eventStream)
     {
         foreach ($eventStream as $event) {
-            $projectMetohd = 'project' . ClassFunctions::short($event);
-            $this->$projectMetohd($event);
+            $projectMethod = 'project' . ClassFunctions::short($event);
+            $this->$projectMethod($event);
         }
     }
 }
