@@ -20,7 +20,7 @@ php composer.phar install
 
 Next you have to update your hosts file (usually located at */etc/hosts*), with the line below
 
-    172.21.99.6 mydddblog.dev www.mydddblog.dev redis.mydddblog.dev
+    172.21.99.6 mydddblog.test www.mydddblog.test redis.mydddblog.test
     
 ## Running the application
 
@@ -30,6 +30,6 @@ From the root application folder, run
     
 When vagrant finishes bootstraping the VM, open up a browser and go to
 
-**http://www.mydddblog.dev**
+**http://www.mydddblog.test**
 
 Have fun!
