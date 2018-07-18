@@ -31,7 +31,7 @@ echo '# phpredmin - Simple web interface to manage and monitor your Redis
 #
 # Allows only localhost by default
 <VirtualHost *:80>
-    ServerName redis.mydddblog.dev
+    ServerName redis.mydddblog.test
     DocumentRoot /var/www/phpredmin/public
 
     <Directory "/var/www/phpredmin/public">
@@ -43,8 +43,8 @@ echo '# phpredmin - Simple web interface to manage and monitor your Redis
         Allow from 172.21.99.1
     </Directory>
 
-    ErrorLog /var/log/apache2/redis.mydddblog.dev.log
-    CustomLog /var/log/apache2/redis.mydddblog.dev.log combined
+    ErrorLog /var/log/apache2/redis.mydddblog.test.log
+    CustomLog /var/log/apache2/redis.mydddblog.test.log combined
 </VirtualHost>' > /etc/apache2/sites-available/phpredmin
 a2ensite phpredmin
 echo 'Done.'
