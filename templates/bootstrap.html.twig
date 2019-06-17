@@ -253,7 +253,7 @@
         <div class="form-group{% if not form.vars.valid %} has-error{% endif %}">
     {% endif %}
         <div class="checkbox">
-            {% if label is not sameas(false) %}
+            {% if label is not same as(false) %}
                 {% if not compound %}
                     {% set label_attr = label_attr|merge({'for': id}) %}
                 {% endif %}
@@ -310,7 +310,7 @@
     {% endif %}
 
         <div class="radio">
-            {% if label is not sameas(false) %}
+            {% if label is not same as(false) %}
                 {% if not compound %}
                     {% set label_attr = label_attr|merge({'for': id}) %}
                 {% endif %}
@@ -521,7 +521,7 @@
         {% set col_size = attr.col_size %}
     {% endif %}
 
-    {% if label is not sameas(false) %}
+    {% if label is not same as(false) %}
         {% set style = style|default(bootstrap_get_style()) %}
         {% set label_col = label_col|default(bootstrap_get_label_col()) %}
 

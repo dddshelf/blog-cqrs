@@ -22,7 +22,7 @@ Next you have to update your hosts file (usually located at */etc/hosts*), with 
 
     172.21.99.6 mydddblog.test www.mydddblog.test redis.mydddblog.test
     
-## Running the application
+## Running the application via Vagrant
 
 From the root application folder, run
 
@@ -33,3 +33,17 @@ When vagrant finishes bootstraping the VM, open up a browser and go to
 **http://www.mydddblog.test**
 
 Have fun!
+
+## Running the application via Docker
+
+Create docker-compose.yml from docker-compose.yml.dist
+
+    cp docker-compose.yml.dist docker-compose.yml
+
+Create docker/nginx/default.conf from docker/nginx/default.conf.dist
+
+    cp docker/nginx/default.conf.dist docker/nginx/default.conf
+
+Create config/depended.php from config/depended.php.dist
+
+    cp config/depended.php.dist config/depended.php

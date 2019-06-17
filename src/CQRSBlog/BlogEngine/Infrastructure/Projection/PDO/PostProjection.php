@@ -112,8 +112,9 @@ class PostProjection extends BaseProjection implements BasePostProjection
      */
     public function projectCommentWasAdded(CommentWasAdded $event)
     {
-        $stmt = $this->pdo->query('SELECT * FROM posts WHERE post_id = :post_id');
-        $stmt->bindParam(':post_id', $event->getAggregateId());
+        $stmt = $this->pdo->prepare('SELECT * FROM posts WHERE post_id = :post_id');
+        $aggregateId = $event->getAggregateId();
+        $stmt->execute([':post_id' => $aggregateId]);
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
@@ -128,7 +129,7 @@ class PostProjection extends BaseProjection implements BasePostProjection
             ':title' => $post['title'],
             ':content' => $post['content'],
             ':state' => $post['state'],
-            ':comment' => $post['comment']
+            ':comment' => $event->getComment()
         ]);
     }
 }

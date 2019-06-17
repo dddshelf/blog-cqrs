@@ -1,2 +1,6 @@
 /vendor
 /.vagrant
+var/data/
+docker-compose.yml
+docker/nginx/default.conf
+config/depended.php
