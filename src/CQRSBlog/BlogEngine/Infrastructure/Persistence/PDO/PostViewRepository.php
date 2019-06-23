@@ -27,7 +27,7 @@ class PostViewRepository implements BasePostViewRepository
      */
     public function get($id)
     {
-        $stmt = $this->pdo->query('SELECT * FROM posts_with_comments WHERE post_id = :post_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM posts_with_comments WHERE post_id = :post_id');
         $stmt->execute([
             ':post_id' => $id
         ]);
@@ -37,13 +37,13 @@ class PostViewRepository implements BasePostViewRepository
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (null === $title) {
-                $title = $row['TITLE'];
-                $content = $row['CONTENT'];
+                $title = $row['title'];
+                $content = $row['content'];
             }
 
             $comments[] = [
-                'comment_id' => $row['COMMENT_ID'],
-                'comment'    => $row['COMMENT']
+                'comment_id' => $row['comment_id'],
+                'comment'    => $row['comment']
             ];
         }
 
@@ -69,9 +69,9 @@ class PostViewRepository implements BasePostViewRepository
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $posts[] = new PostView(
-                $row['POST_ID'],
-                $row['TITLE'],
-                $row['CONTENT'],
+                $row['post_id'],
+                $row['title'],
+                $row['content'],
                 []
             );
         }

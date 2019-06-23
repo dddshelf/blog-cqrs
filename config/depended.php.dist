@@ -1,0 +1,6 @@
+<?php
+
+return [
+    'redis.connect' => 'tcp://redis:6379',
+    'mysql.host' => 'mysql'
+];

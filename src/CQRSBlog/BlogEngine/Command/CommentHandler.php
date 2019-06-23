@@ -2,7 +2,7 @@
 
 namespace CQRSBlog\BlogEngine\Command;
 
-use CQRSBlog\BlogEngine\Command\CommentCommand;
+use CQRSBlog\BlogEngine\DomainModel\Post;
 use CQRSBlog\BlogEngine\DomainModel\PostId;
 use CQRSBlog\BlogEngine\DomainModel\PostRepository;
 
@@ -20,6 +20,7 @@ class CommentHandler
 
     public function handle(CommentCommand $aCommentCommand)
     {
+        /** @var Post $aNewPost */
         $aNewPost = $this->postRepository->get(
             PostId::fromString($aCommentCommand->getPostId())
         );

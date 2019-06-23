@@ -6,6 +6,7 @@ use CQRSBlog\BlogEngine\Command\PublishPostCommand;
 use CQRSBlog\BlogEngine\Command\UpdatePostCommand;
 use CQRSBlog\BlogEngine\Query\AllPostsQuery;
 use CQRSBlog\BlogEngine\Query\PostQuery;
+use CQRSBlog\Common\ServiceBus\CommandBus;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -159,7 +160,9 @@ $app
                     $data['comment']
                 );
 
-                $app['command_bus']->handle($aCommentCommand);
+                /** @var  $commandBus CommandBus */
+                $commandBus = $app['command_bus'];
+                $commandBus->handle($aCommentCommand);
 
                 $app['session']->getFlashBag()->add('notices', 'Comment was added!');
                 return $app->redirect($app['url_generator']->generate('post', ['id' => $id]));
