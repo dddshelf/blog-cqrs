@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
     ],
-    "hash": "723cee7a70b1e7a387816ed3c243eddd",
+    "content-hash": "46bbef540d311d575979da8e8ea767d2",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -64,7 +65,7 @@
             "keywords": [
                 "bootstrap"
             ],
-            "time": "2014-04-03 17:17:03"
+            "time": "2014-04-03T17:17:03+00:00"
         },
         {
             "name": "buttercup/protects",
@@ -111,7 +112,7 @@
                 "domain-driven design",
                 "event sourcing"
             ],
-            "time": "2014-05-03 18:49:24"
+            "time": "2014-05-03T18:49:24+00:00"
         },
         {
             "name": "csanquer/pdo-service-provider",
@@ -164,7 +165,7 @@
                 "service provider",
                 "silex"
             ],
-            "time": "2014-06-05 07:37:32"
+            "time": "2014-06-05T07:37:32+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -236,7 +237,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2013-06-16 21:33:03"
+            "time": "2013-06-16T21:33:03+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -288,7 +289,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2013-01-12 18:59:04"
+            "time": "2013-01-12T18:59:04+00:00"
         },
         {
             "name": "jms/metadata",
@@ -340,7 +341,7 @@
                 "xml",
                 "yaml"
             ],
-            "time": "2013-11-05 23:02:36"
+            "time": "2013-11-05T23:02:36+00:00"
         },
         {
             "name": "jms/parser-lib",
@@ -375,7 +376,7 @@
                 "Apache2"
             ],
             "description": "A library for easily creating recursive-descent parsers.",
-            "time": "2012-11-18 18:08:43"
+            "time": "2012-11-18T18:08:43+00:00"
         },
         {
             "name": "jms/serializer",
@@ -445,7 +446,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2014-03-18 08:39:00"
+            "time": "2014-03-18T08:39:00+00:00"
         },
         {
             "name": "mathiasverraes/classfunctions",
@@ -496,7 +497,7 @@
                 "classes",
                 "utilities"
             ],
-            "time": "2014-02-06 22:47:35"
+            "time": "2014-02-06T22:47:35+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -564,7 +565,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-06-04 16:30:04"
+            "time": "2014-06-04T16:30:04+00:00"
         },
         {
             "name": "moontoast/math",
@@ -600,7 +601,7 @@
                 "bcmath",
                 "math"
             ],
-            "time": "2013-01-19 17:42:34"
+            "time": "2013-01-19T17:42:34+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -650,7 +651,7 @@
                 "sequence",
                 "set"
             ],
-            "time": "2014-03-11 13:46:42"
+            "time": "2014-03-11T13:46:42+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -699,7 +700,7 @@
                 "php",
                 "type"
             ],
-            "time": "2014-01-09 22:37:17"
+            "time": "2014-01-09T22:37:17+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -747,7 +748,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2013-11-22 08:30:29"
+            "time": "2013-11-22T08:30:29+00:00"
         },
         {
             "name": "predis/predis",
@@ -794,7 +795,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2014-01-16 14:10:29"
+            "time": "2014-01-16T14:10:29+00:00"
         },
         {
             "name": "predis/service-provider",
@@ -839,7 +840,7 @@
                 "redis",
                 "silex"
             ],
-            "time": "2013-10-18 18:02:18"
+            "time": "2013-10-18T18:02:18+00:00"
         },
         {
             "name": "psr/log",
@@ -877,7 +878,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2012-12-21T11:40:51+00:00"
         },
         {
             "name": "rhumsaa/uuid",
@@ -943,7 +944,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2014-02-22 00:08:43"
+            "time": "2014-02-22T00:08:43+00:00"
         },
         {
             "name": "silex/silex",
@@ -1029,7 +1030,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2014-03-29 14:15:59"
+            "time": "2014-03-29T14:15:59+00:00"
         },
         {
             "name": "silex/web-profiler",
@@ -1076,7 +1077,7 @@
             ],
             "description": "A WebProfiler for Silex",
             "homepage": "http://silex.sensiolabs.org/",
-            "time": "2014-06-04 21:14:30"
+            "time": "2014-06-04T21:14:30+00:00"
         },
         {
             "name": "symfony/browser-kit",
@@ -1133,7 +1134,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-12 09:28:39"
+            "time": "2014-05-12T09:28:39+00:00"
         },
         {
             "name": "symfony/class-loader",
@@ -1185,7 +1186,7 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-16 10:36:34"
+            "time": "2014-04-16T10:36:34+00:00"
         },
         {
             "name": "symfony/config",
@@ -1235,7 +1236,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-22 08:11:23"
+            "time": "2014-04-22T08:11:23+00:00"
         },
         {
             "name": "symfony/console",
@@ -1292,7 +1293,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-22 08:54:24"
+            "time": "2014-05-22T08:54:24+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -1345,7 +1346,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-12 09:28:39"
+            "time": "2014-05-12T09:28:39+00:00"
         },
         {
             "name": "symfony/debug",
@@ -1402,7 +1403,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-25 14:44:21"
+            "time": "2014-05-25T14:44:21+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -1461,7 +1462,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-12 09:28:39"
+            "time": "2014-05-12T09:28:39+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -1516,7 +1517,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-31 02:02:56"
+            "time": "2014-05-31T02:02:56+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1575,7 +1576,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-29 10:13:57"
+            "time": "2014-04-29T10:13:57+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -1624,7 +1625,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-16 10:36:21"
+            "time": "2014-04-16T10:36:21+00:00"
         },
         {
             "name": "symfony/finder",
@@ -1673,7 +1674,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-22 13:47:45"
+            "time": "2014-05-22T13:47:45+00:00"
         },
         {
             "name": "symfony/form",
@@ -1739,7 +1740,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-17 20:48:44"
+            "time": "2014-05-17T20:48:44+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -1815,7 +1816,7 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "http://symfony.com",
-            "time": "2014-05-20 07:56:04"
+            "time": "2014-05-20T07:56:04+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -1870,7 +1871,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-26 19:02:40"
+            "time": "2014-05-26T19:02:40+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -1943,7 +1944,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-31 18:45:50"
+            "time": "2014-05-31T18:45:50+00:00"
         },
         {
             "name": "symfony/icu",
@@ -1991,7 +1992,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-10-04 10:06:38"
+            "time": "2013-10-04T10:06:38+00:00"
         },
         {
             "name": "symfony/intl",
@@ -2068,7 +2069,7 @@
                 "l10n",
                 "localization"
             ],
-            "time": "2014-04-18 20:40:13"
+            "time": "2014-04-18T20:40:13+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
@@ -2128,7 +2129,7 @@
             ],
             "description": "Symfony Monolog Bridge",
             "homepage": "http://symfony.com",
-            "time": "2014-04-16 10:36:21"
+            "time": "2014-04-16T10:36:21+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -2182,7 +2183,89 @@
                 "configuration",
                 "options"
             ],
-            "time": "2014-04-16 10:36:21"
+            "time": "2014-04-16T10:36:21+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "30885182c981ab175d4d034db0f6f469898070ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/30885182c981ab175d4d034db0f6f469898070ab",
+                "reference": "30885182c981ab175d4d034db0f6f469898070ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-ctype": "*"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.25.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-20T20:35:02+00:00"
         },
         {
             "name": "symfony/process",
@@ -2231,7 +2314,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-23 09:02:52"
+            "time": "2014-05-23T09:02:52+00:00"
         },
         {
             "name": "symfony/property-access",
@@ -2291,7 +2374,7 @@
                 "property path",
                 "reflection"
             ],
-            "time": "2014-05-21 13:18:38"
+            "time": "2014-05-21T13:18:38+00:00"
         },
         {
             "name": "symfony/routing",
@@ -2359,7 +2442,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-04-23 14:08:54"
+            "time": "2014-04-23T14:08:54+00:00"
         },
         {
             "name": "symfony/security",
@@ -2435,7 +2518,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-17 08:07:33"
+            "time": "2014-05-17T08:07:33+00:00"
         },
         {
             "name": "symfony/serializer",
@@ -2484,7 +2567,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-18 20:40:52"
+            "time": "2014-04-18T20:40:52+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -2533,7 +2616,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-18 20:40:13"
+            "time": "2014-04-18T20:40:13+00:00"
         },
         {
             "name": "symfony/templating",
@@ -2588,7 +2671,7 @@
             ],
             "description": "Symfony Templating Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-18 19:44:02"
+            "time": "2014-04-18T19:44:02+00:00"
         },
         {
             "name": "symfony/translation",
@@ -2645,7 +2728,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-22 13:47:45"
+            "time": "2014-05-22T13:47:45+00:00"
         },
         {
             "name": "symfony/twig-bridge",
@@ -2719,7 +2802,7 @@
             ],
             "description": "Symfony Twig Bridge",
             "homepage": "http://symfony.com",
-            "time": "2014-05-26 15:36:38"
+            "time": "2014-05-26T15:36:38+00:00"
         },
         {
             "name": "symfony/twig-bundle",
@@ -2777,7 +2860,7 @@
             ],
             "description": "Symfony TwigBundle",
             "homepage": "http://symfony.com",
-            "time": "2014-04-29 11:32:21"
+            "time": "2014-04-29T11:32:21+00:00"
         },
         {
             "name": "symfony/validator",
@@ -2849,7 +2932,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-31 02:02:56"
+            "time": "2014-05-31T02:02:56+00:00"
         },
         {
             "name": "symfony/web-profiler-bundle",
@@ -2906,34 +2989,42 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "http://symfony.com",
-            "time": "2014-05-12 09:28:39"
+            "time": "2014-05-12T09:28:39+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v1.15.1",
+            "version": "v1.44.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig.git",
-                "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed"
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "ae39480f010ef88adc7938503c9b02d3baf2f3b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1fb5784662f438d7d96a541e305e28b812e2eeed",
-                "reference": "1fb5784662f438d7d96a541e305e28b812e2eeed",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ae39480f010ef88adc7938503c9b02d3baf2f3b3",
+                "reference": "ae39480f010ef88adc7938503c9b02d3baf2f3b3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.4"
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.44-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2948,22 +3039,35 @@
                     "role": "Lead Developer"
                 },
                 {
+                    "name": "Twig Team",
+                    "role": "Contributors"
+                },
+                {
                     "name": "Armin Ronacher",
                     "email": "armin.ronacher@active-4.com",
                     "role": "Project Founder"
-                },
-                {
-                    "name": "Twig Team",
-                    "homepage": "https://github.com/fabpot/Twig/graphs/contributors",
-                    "role": "Contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
+            "homepage": "https://twig.symfony.com",
             "keywords": [
                 "templating"
             ],
-            "time": "2014-02-13 10:19:29"
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v1.44.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-25T13:31:46+00:00"
         }
     ],
     "packages-dev": [
@@ -3030,7 +3134,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2014-02-05 21:30:08"
+            "time": "2014-02-05T21:30:08+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3095,7 +3199,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-26 14:55:24"
+            "time": "2014-05-26T14:55:24+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3140,7 +3244,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2013-10-10 15:34:57"
+            "time": "2013-10-10T15:34:57+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -3184,7 +3288,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2014-01-30 17:20:04"
+            "time": "2014-01-30T17:20:04+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -3228,7 +3332,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2013-08-02 07:42:54"
+            "time": "2013-08-02T07:42:54+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -3278,7 +3382,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03 05:10:30"
+            "time": "2014-03-03T05:10:30+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -3352,7 +3456,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-06-07 07:30:48"
+            "time": "2014-06-07T07:30:48+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3409,7 +3513,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2014-06-07 12:56:52"
+            "time": "2014-06-07T12:56:52+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -3474,7 +3578,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2014-05-02 07:05:58"
+            "time": "2014-05-02T07:05:58+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -3524,7 +3628,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2013-08-03 16:46:33"
+            "time": "2013-08-03T16:46:33+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -3575,7 +3679,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2014-02-18 16:17:19"
+            "time": "2014-02-18T16:17:19+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -3641,7 +3745,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2014-02-16 08:26:31"
+            "time": "2014-02-16T08:26:31+00:00"
         },
         {
             "name": "sebastian/version",
@@ -3676,7 +3780,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2014-03-07 15:35:33"
+            "time": "2014-03-07T15:35:33+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -3725,7 +3829,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-16 14:25:18"
+            "time": "2014-05-16T14:25:18+00:00"
         }
     ],
     "aliases": [],
@@ -3734,6 +3838,9 @@
         "buttercup/protects": 20,
         "braincrafted/bootstrap-bundle": 20
     },
+    "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
